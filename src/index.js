@@ -1,19 +1,36 @@
 const { GraphQLServer } = require('graphql-yoga')
 
-//  1
 const typeDefs = `
   type Query {
     info: String!
+    feed: [Link!]!
+  }
+
+  type Link {
+    id: ID!
+    description: String!
+    url: String!
   }
 `
-// 2
+
+let links = [{
+  id: 'link-0',
+  url: 'www.hotwographql.com',
+  description: 'Fullstack tutorial for GraphQL'
+}]
+
 const resolvers = {
   Query: {
-    info: () => `This is the APi of Hackernews Clone`
+    info: () => `This is the APi of Hackernews Clone`,
+    feed: () => links,
+  },
+  Link: {
+    id: (parent) =>parent.id,
+    description: (parent) => parent.description,
+    url: (parent) => parent.url,
   }
 }
 
-// 3
 const server = new GraphQLServer({
   typeDefs,
   resolvers
