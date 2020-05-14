@@ -1,38 +1,28 @@
 const { GraphQLServer } = require('graphql-yoga')
 
-const typeDefs = `
-  type Query {
-    info: String!
-    feed: [Link!]!
-  }
 
-  type Link {
-    id: ID!
-    description: String!
-    url: String!
-  }
-`
 
-let links = [{
-  id: 'link-0',
-  url: 'www.hotwographql.com',
-  description: 'Fullstack tutorial for GraphQL'
-}]
+let idCount = links.length
 
 const resolvers = {
   Query: {
     info: () => `This is the APi of Hackernews Clone`,
-    feed: () => links,
+    feed: (root, args, context, info) => {
+      return context.prisma.links()
+    },
   },
-  Link: {
-    id: (parent) =>parent.id,
-    description: (parent) => parent.description,
-    url: (parent) => parent.url,
+  Mutation: {
+    post: (root, args, context) => {
+      return context.prisma.createLink({
+        url: args.url,
+        description: args.description,
+      })
+    }
   }
 }
 
 const server = new GraphQLServer({
-  typeDefs,
+  typeDefs: './src/schema.graphql',
   resolvers
 })
 
