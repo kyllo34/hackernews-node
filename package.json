@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/kyllo34/hackernews-node#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
     "prisma-client-lib": "^1.34.10"
   }
 }
