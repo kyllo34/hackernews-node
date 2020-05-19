@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "resolutions": {
+    "graphql": "^14.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kyllo34/hackernews-node.git"
@@ -18,6 +21,7 @@
   "homepage": "https://github.com/kyllo34/hackernews-node#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "graphql-yoga": "^1.18.3",
     "jsonwebtoken": "^8.5.1",
     "prisma-client-lib": "^1.34.10"
   }
